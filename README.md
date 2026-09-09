@@ -1,42 +1,43 @@
-# TCCC Evaluation Suite — Web/PWA
+# TCCC Evaluation Suite — Web/PWA v2.21.0-web.1
 
-**Release:** v2.20.0-web.1  
-**Role:** Installable/offline-capable web evaluator plus local class analytics/management surface
+This is the complete static GitHub Pages/PWA repository synchronized to the Android APK **v2.21.0** evaluator/data model.
 
-This repository is a plain static GitHub Pages application. It intentionally contains **one workflow only** (`.github/workflows/pages.yml`) and requires no npm, Node build, Capacitor, Java, Gradle, or Android project.
+## Synchronized capabilities
 
-## Synchronized with APK v2.20.0
-The evaluator/data model is synchronized with the Android v2.20.0 baseline, with platform-specific PWA/service-worker behavior only.
+- Identical Tier 1–4 checklist data to APK v2.21.0
+- Structured failure-mode/root-cause capture
+- Critical-failure RCA completion safeguard
+- Remediation reason/action and first-pass vs final-pass analytics
+- Field Mode / Review Mode
+- Roster filters and competency heat map
+- MAJCOM / command catalog
+- Home installation vs training-location separation
+- Supported command vs installation host-command distinction
+- Legacy installation alias migration
+- Multi-class management filters: MAJCOM, installation, tier, course type
+- MAJCOM and installation rollups
+- RCA by command / installation
+- Normalized criterion failure rates
+- Data-quality indicators for missing command/base/RCA metadata
+- Analytics-ready enterprise-detail export schema
+- Contact: John Garcia only
 
-### v2.20 evaluator improvements
-- Field Mode / Review Mode progressive disclosure.
-- Critical FAIL requires structured failure mode + primary contributor.
-- Noncritical FAIL remains one-tap and can be classified during review.
-- A2 remediation reason and corrective action.
-- Collapsible evaluator header.
-- Roster search and operational filters.
-- Existing modal fix, grading-state colors, Next Unresolved, NT justification, timer recovery, and finalization safeguards retained.
+## Platform-specific web behavior
 
-### Performance intelligence
-- First-attempt vs final qualification.
-- Remediation rate/success and repeat failure.
-- Critical-failure rate and median attempts to proficiency.
-- Normalized criterion failure rate: `FAIL / (PASS + FAIL)`.
-- Scenario coverage and high-NT criteria.
-- Root-cause / failure-mode distributions.
-- Student competency heat map and descriptive comparison.
-- Descriptive evaluator pattern signals (not inter-rater agreement).
-- Performance Analytics CSV for DAF backend/analytics ingestion.
+The web version uses browser-local storage and an offline-capable service worker. It does not use Android, Capacitor, Gradle, npm, or a GitHub Actions build.
 
 ## GitHub Pages deployment
-Push to `main`. The `pages.yml` workflow validates the static release, stages only the web files, and deploys directly to GitHub Pages.
 
-The service worker uses a release-specific cache (`2.20.0-web.1`) so previous shells are replaced when the new service worker activates.
+This repository is intentionally a static site.
 
-## Intentionally deferred to the DAF backend
-The PWA does not pretend to provide enterprise authoritative records, MAJCOM/USAF aggregation, RBAC, identity assurance, server-side integrity, cross-device synchronization, or longitudinal enterprise readiness. The v2.20 schema/exports are designed to support those capabilities when the DAF backend is connected.
+1. Upload the repository contents directly to the root of `DAF-TCCC-WEB`.
+2. Delete any obsolete `.github/workflows/pages.yml` or Android/APK workflows if they still exist in GitHub.
+3. GitHub → **Settings → Pages**.
+4. **Source:** Deploy from a branch.
+5. **Branch:** `main`.
+6. **Folder:** `/(root)`.
+7. Save.
 
-## Clinical/content note
-The approved tourniquet-conversion criterion uses **“Wound could be closely monitored.”** Existing source provenance remains visible in Review Mode. Formal standards supersession/version governance should be controlled by the responsible program authority rather than silently inferred by this app.
+The repository includes `.nojekyll` so GitHub Pages serves the static files directly.
 
-**Contact: John Garcia**
+Expected visible version: **2.21.0-web.1**.

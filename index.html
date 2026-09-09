@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none';">
 <link rel="icon" type="image/png" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
-<link rel="stylesheet" href="styles.css?v=2.20.0-web.1">
+<link rel="stylesheet" href="styles.css?v=2.21.0-web.1">
 <title>TCCC Evaluation Suite</title>
 </head>
 <body>
@@ -50,13 +50,42 @@
       <img class="heroIcon" src="assets/app-icon.png" alt="TCCC Evaluation Suite icon">
       <div class="eyebrow">TACTICAL COMBAT CASUALTY CARE</div>
       <h1 data-brand-product>TCCC Evaluation Suite</h1>
-      <p>Class-based, offline grading for TCCC Tier 1–4 scenario evaluations. Critical tasks require explicit grading; noncritical criteria support scenario applicability and block closeout.</p>
-      <div class="versionLine">v<span id="appVersion">—</span> · Web/PWA · Performance-intelligence evaluator workflow</div>
+      <p>Class-based, offline grading for TCCC Tier 1–4 scenario evaluations. Critical tasks require explicit grading; noncritical criteria support scenario applicability, structured review, and performance-improvement analysis.</p>
+      <div class="versionLine">v<span id="appVersion">—</span> · Web/PWA · Readiness & performance intelligence</div>
     </section>
     <section class="homeActions">
       <button id="newClassBtn" class="action primary big">+ New Class</button>
       <button id="importBackupBtn" class="action big">Restore Backup</button>
       <input id="backupImportFile" type="file" accept=".json,application/json" hidden>
+    </section>
+    <section class="card managementCard">
+      <div class="cardHead"><span>Program Management Intelligence</span><span id="managementScopeLabel">All local classes</span></div>
+      <p class="helper">Local analytics only. Use MAJCOM and installation filters to review training performance, RCA, remediation, and competency gaps before exporting data to the future DAF backend.</p>
+      <div class="managementFilters">
+        <label><span>MAJCOM / Command</span><select id="managementMajcom"></select></label>
+        <label><span>Home installation</span><select id="managementInstallation"></select></label>
+        <label><span>Tier</span><select id="managementTier"><option value="">All tiers</option><option value="1">Tier 1</option><option value="2">Tier 2</option><option value="3">Tier 3</option><option value="4">Tier 4</option></select></label>
+        <label><span>Course type</span><select id="managementCourseType"><option value="">All course types</option><option value="initial">Initial qualification</option><option value="sustainment">Sustainment / refresher</option><option value="remediation">Remediation</option><option value="calibration">Instructor / evaluator calibration</option><option value="other">Other</option></select></label>
+        <button id="managementResetBtn" class="ghost small" type="button">Reset Scope</button>
+      </div>
+      <div id="managementKpis" class="analyticsKpis"></div>
+      <details class="analyticsDetails" open>
+        <summary>MAJCOM &amp; Installation Performance</summary>
+        <div id="managementMajcomTable"></div>
+        <div id="managementInstallationTable" class="managementTableGap"></div>
+      </details>
+      <details class="analyticsDetails">
+        <summary>Root Causes &amp; Competency Gaps</summary>
+        <div class="analyticsSplit">
+          <div><h3>Primary Root Causes</h3><div id="managementRootCauses"></div></div>
+          <div><h3>Highest Competency Gaps</h3><div id="managementGapTable"></div></div>
+        </div>
+      </details>
+      <div id="managementDataQuality" class="dataQualityPanel"></div>
+      <div class="exportGrid managementExports">
+        <button id="managementSummaryCsvBtn" class="action primary">Management Summary CSV</button>
+        <button id="enterpriseAnalyticsCsvBtn" class="action">Enterprise Detail CSV</button>
+      </div>
     </section>
     <section class="card">
       <div class="cardHead"><span>Classes</span><span id="classCount">0</span></div>
@@ -140,6 +169,7 @@
         <button id="classTimersCsvBtn" class="action">Timers CSV</button>
         <button id="classEventsCsvBtn" class="action">Events CSV</button>
         <button id="classAnalyticsCsvBtn" class="action">Performance Analytics CSV</button>
+        <button id="classEnterpriseCsvBtn" class="action">Enterprise Detail CSV</button>
         <button id="backupClassBtn" class="action">Backup Class JSON</button>
       </div>
     </section>
@@ -217,9 +247,10 @@
 <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="sheet formSheet"><div class="sheetHead"><h2 id="formModalTitle"></h2><button data-close="formModal" class="ghost">Close</button></div><div id="formModalBody"></div></div></div>
 <div id="reportModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="sheet"><div class="sheetHead"><h2>Evaluation Review</h2><button data-close="reportModal" class="ghost">Close</button></div><pre id="aarText"></pre><div class="actions"><button id="confirmFinalizeBtn" class="action primary">Finalize Evaluation</button><button id="copyAar" class="action">Copy Review</button></div></div></div>
 
-<script src="version.js?v=2.20.0-web.1"></script>
-<script src="tiers.js?v=2.20.0-web.1"></script>
-<script src="branding.js?v=2.20.0-web.1"></script>
-<script src="app.js?v=2.20.0-web.1"></script>
+<script src="version.js?v=2.21.0-web.1"></script>
+<script src="tiers.js?v=2.21.0-web.1"></script>
+<script src="branding.js?v=2.21.0-web.1"></script>
+<script src="installations.js?v=2.21.0-web.1"></script>
+<script src="app.js?v=2.21.0-web.1"></script>
 </body>
 </html>

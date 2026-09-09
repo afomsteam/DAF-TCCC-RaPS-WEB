@@ -209,3 +209,27 @@ body.modalOpen{overflow:hidden}
 .signGrid{grid-template-columns:repeat(3,1fr)}
 @media(max-width:720px){.signGrid{grid-template-columns:1fr}}
 .analyticsSubhead{font-size:10px;margin:14px 0 7px;color:#a9becb;text-transform:uppercase;letter-spacing:.05em}.classificationRate{font-size:10px;color:var(--muted);padding:7px 9px;background:#112431;border:1px solid rgba(90,127,150,.3);border-radius:8px;margin-bottom:5px}.coverageTable{min-width:460px}.evaluatorSignals{margin-top:16px}.evaluatorSignals h3{font-size:12px;color:#c8d9e3;margin:0 0 8px}.evaluatorSignals h3 small{font-weight:500;color:var(--muted);margin-left:5px}.evaluatorTable{min-width:620px}
+
+/* v2.21.0 location governance + MAJCOM/base management intelligence */
+.fieldHelp{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.4}
+.inlineCheck{display:flex!important;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;background:#11181f;padding:10px 12px;color:#dbe7ee!important}
+.inlineCheck input{width:auto!important;min-height:auto!important;margin:0;accent-color:var(--blue)}
+.inlineCheck span{display:inline!important;margin:0!important}
+.conditionalFields{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px;border:1px dashed #3d4d59;border-radius:9px;background:#0f161c}
+.conditionalFields .full{grid-column:1/-1}
+.managementCard{overflow:visible}
+.managementFilters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:8px;padding:12px;border-bottom:1px solid var(--line)}
+.managementFilters label{display:grid;gap:5px;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.04em}
+.managementFilters select{width:100%;min-height:44px;background:#101b24;color:#f2f7fa;border:1px solid #3d4d59;border-radius:8px;padding:8px}
+.managementFilters .ghost{align-self:end}
+.managementTableGap{margin-top:14px}
+.managementExports{padding-top:8px}
+.dataQualityPanel{margin:12px;border:1px solid rgba(90,127,150,.3);border-radius:10px;padding:12px;background:#0e1d28}
+.dataQualityPanel h3{margin:0 0 9px;font-size:12px;color:#c8d9e3}
+.dataQualityPanel>small{display:block;margin-top:9px;color:var(--muted);line-height:1.4}
+.dataQualityGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.dataQualityItem{border:1px solid rgba(90,127,150,.28);border-radius:8px;padding:9px;background:#13232d;display:grid;gap:3px}
+.dataQualityItem b{font:900 18px/1 ui-monospace,monospace}.dataQualityItem span{font-size:9px;color:#b7c7d1;line-height:1.25}
+.dataQualityItem.good{border-color:rgba(67,160,102,.5)}.dataQualityItem.warn{border-color:rgba(214,154,55,.6)}.dataQualityItem.bad{border-color:rgba(215,91,91,.65)}
+@media(max-width:960px){.managementFilters{grid-template-columns:repeat(2,minmax(0,1fr))}.managementFilters .ghost{align-self:stretch}.dataQualityGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.conditionalFields{grid-template-columns:1fr}.conditionalFields .full{grid-column:auto}.managementFilters{grid-template-columns:1fr}.dataQualityGrid{grid-template-columns:1fr 1fr}}

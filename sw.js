@@ -1,13 +1,14 @@
-const CACHE_NAME = 'tccc-eval-web-v2-20-0-web-1';
-const VERSION = '2.20.0-web.1';
+const CACHE_NAME = 'tccc-eval-web-v2-21-0-web-1';
+const VERSION = '2.21.0-web.1';
 const SHELL = [
   './',
   './index.html',
   `./styles.css?v=${VERSION}`,
   `./version.js?v=${VERSION}`,
   `./tiers.js?v=${VERSION}`,
-  `./app.js?v=${VERSION}`,
   `./branding.js?v=${VERSION}`,
+  `./installations.js?v=${VERSION}`,
+  `./app.js?v=${VERSION}`,
   './manifest.webmanifest',
   './assets/app-icon.png',
   './assets/icon-192.png',
@@ -15,10 +16,18 @@ const SHELL = [
   './assets/splash-background.png'
 ];
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL.map(path => new URL(path, self.registration.scope).href))).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(SHELL.map(path => new URL(path, self.registration.scope).href)))
+      .then(() => self.skipWaiting())
+  );
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim()));
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+      .then(() => self.clients.claim())
+  );
 });
 self.addEventListener('fetch', event => {
   const request = event.request;
@@ -27,8 +36,26 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
   const versionedShell = url.searchParams.get('v') === VERSION;
   if (request.mode === 'navigate' || versionedShell) {
-    event.respondWith(fetch(request).then(response => {if (response && response.ok) {const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}return response;}).catch(async () => (await caches.match(request)) || (request.mode === 'navigate' ? caches.match(new URL('./index.html', self.registration.scope).href) : undefined)));
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(async () => (await caches.match(request)) || (request.mode === 'navigate' ? caches.match(new URL('./index.html', self.registration.scope).href) : undefined))
+    );
     return;
   }
-  event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {if(response&&response.ok){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}return response;}).catch(()=>cached)));
+  event.respondWith(
+    caches.match(request).then(cached => cached || fetch(request).then(response => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+      }
+      return response;
+    }).catch(() => cached))
+  );
 });
